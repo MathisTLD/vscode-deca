@@ -1,0 +1,1226 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Deca",
+  "patterns": [
+    {
+      "begin": "\\b(package)\\b\\s*",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.other.package.deca"
+        }
+      },
+      "end": "\\s*(;)",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.terminator.deca"
+        }
+      },
+      "name": "meta.package.deca",
+      "contentName": "storage.modifier.package.deca",
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "match": "(?<=\\.)\\s*\\.|\\.(?=\\s*;)",
+          "name": "invalid.illegal.character_not_allowed_here.deca"
+        },
+        {
+          "match": "(?<!_)_(?=\\s*(\\.|;))|\\b\\d+|-+",
+          "name": "invalid.illegal.character_not_allowed_here.deca"
+        },
+        {
+          "match": "[A-Z]+",
+          "name": "invalid.deprecated.package_name_not_lowercase.deca"
+        },
+        {
+          "match": "(?x)\\b(?<!\\$)\n(abstract|assert|boolean|break|byte|case|catch|char|class|\nconst|continue|default|do|double|else|enum|extends|final|\nfinally|float|for|goto|if|implements|import|instanceof|int|\ninterface|long|native|new|non-sealed|package|permits|private|protected|public|\nreturn|sealed|short|static|strictfp|super|switch|syncronized|this|\nthrow|throws|transient|try|void|volatile|while|yield|\ntrue|false|null)\\b",
+          "name": "invalid.illegal.character_not_allowed_here.deca"
+        },
+        {
+          "match": "\\.",
+          "name": "punctuation.separator.deca"
+        }
+      ]
+    },
+    {
+      "begin": "\\b(import)\\b\\s*\\b(static)?\\b\\s",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.other.import.deca"
+        },
+        "2": {
+          "name": "storage.modifier.deca"
+        }
+      },
+      "end": "\\s*(;)",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.terminator.deca"
+        }
+      },
+      "name": "meta.import.deca",
+      "contentName": "storage.modifier.import.deca",
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "match": "(?<=\\.)\\s*\\.|\\.(?=\\s*;)",
+          "name": "invalid.illegal.character_not_allowed_here.deca"
+        },
+        {
+          "match": "(?<!\\.)\\s*\\*",
+          "name": "invalid.illegal.character_not_allowed_here.deca"
+        },
+        {
+          "match": "(?<!_)_(?=\\s*(\\.|;))|\\b\\d+|-+",
+          "name": "invalid.illegal.character_not_allowed_here.deca"
+        },
+        {
+          "match": "(?x)\\b(?<!\\$)\n(abstract|assert|boolean|break|byte|case|catch|char|class|\nconst|continue|default|do|double|else|enum|extends|final|\nfinally|float|for|goto|if|implements|import|instanceof|int|\ninterface|long|native|new|non-sealed|package|permits|private|protected|public|\nreturn|sealed|short|static|strictfp|super|switch|syncronized|this|\nthrow|throws|transient|try|void|volatile|while|yield|\ntrue|false|null)\\b",
+          "name": "invalid.illegal.character_not_allowed_here.deca"
+        },
+        {
+          "match": "\\.",
+          "name": "punctuation.separator.deca"
+        },
+        {
+          "match": "\\*",
+          "name": "variable.language.wildcard.deca"
+        }
+      ]
+    },
+    {
+      "include": "#comments-testbench"
+    },
+    {
+      "include": "#code"
+    },
+    {
+      "include": "#module"
+    }
+  ],
+  "repository": {
+    "all-types": {
+      "patterns": [
+        {
+          "include": "#primitive-arrays"
+        },
+        {
+          "include": "#primitive-types"
+        },
+        {
+          "include": "#object-types"
+        }
+      ]
+    },
+    "annotations": {
+      "patterns": [
+        {
+          "begin": "((@)\\s*([^\\s(]+))(\\()",
+          "beginCaptures": {
+            "2": {
+              "name": "punctuation.definition.annotation.deca"
+            },
+            "3": {
+              "name": "storage.type.annotation.deca"
+            },
+            "4": {
+              "name": "punctuation.definition.annotation-arguments.begin.bracket.round.deca"
+            }
+          },
+          "end": "\\)",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.annotation-arguments.end.bracket.round.deca"
+            }
+          },
+          "name": "meta.declaration.annotation.deca",
+          "patterns": [
+            {
+              "captures": {
+                "1": {
+                  "name": "constant.other.key.deca"
+                },
+                "2": {
+                  "name": "keyword.operator.assignment.deca"
+                }
+              },
+              "match": "(\\w*)\\s*(=)"
+            },
+            {
+              "include": "#code"
+            }
+          ]
+        },
+        {
+          "match": "(@)(interface)\\s+(\\w*)|((@)\\s*(\\w+))",
+          "name": "meta.declaration.annotation.deca",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.annotation.deca"
+            },
+            "2": {
+              "name": "storage.modifier.deca"
+            },
+            "3": {
+              "name": "storage.type.annotation.deca"
+            },
+            "5": {
+              "name": "punctuation.definition.annotation.deca"
+            },
+            "6": {
+              "name": "storage.type.annotation.deca"
+            }
+          }
+        }
+      ]
+    },
+    "anonymous-block-and-instance-initializer": {
+      "begin": "{",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.section.block.begin.bracket.curly.deca"
+        }
+      },
+      "end": "}",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.block.end.bracket.curly.deca"
+        }
+      },
+      "patterns": [
+        {
+          "include": "#code"
+        }
+      ]
+    },
+    "anonymous-classes-and-new": {
+      "begin": "\\bnew\\b",
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.control.new.deca"
+        }
+      },
+      "end": "(?=;|\\)|\\]|\\.|,|\\?|:|}|\\+|\\-|\\*|\\/(?!\\/|\\*)|%|!|&|\\||\\^|=)",
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#function-call"
+        },
+        {
+          "include": "#all-types"
+        },
+        {
+          "begin": "(?<=\\))",
+          "end": "(?=;|\\)|\\]|\\.|,|\\?|:|}|\\+|\\-|\\*|\\/(?!\\/|\\*)|%|!|&|\\||\\^|=)",
+          "patterns": [
+            {
+              "include": "#comments"
+            },
+            {
+              "begin": "{",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.section.inner-class.begin.bracket.curly.deca"
+                }
+              },
+              "end": "}",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.section.inner-class.end.bracket.curly.deca"
+                }
+              },
+              "name": "meta.inner-class.deca",
+              "patterns": [
+                {
+                  "include": "#class-body"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "begin": "(?<=\\])",
+          "end": "(?=;|\\)|\\]|\\.|,|\\?|:|}|\\+|\\-|\\*|\\/(?!\\/|\\*)|%|!|&|\\||\\^|=)",
+          "patterns": [
+            {
+              "include": "#comments"
+            },
+            {
+              "begin": "{",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.section.array-initializer.begin.bracket.curly.deca"
+                }
+              },
+              "end": "}",
+              "endCaptures": {
+                "0": {
+                  "name": "punctuation.section.array-initializer.end.bracket.curly.deca"
+                }
+              },
+              "name": "meta.array-initializer.deca",
+              "patterns": [
+                {
+                  "include": "#code"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "include": "#parens"
+        }
+      ]
+    },
+    "class": {
+      "begin": "(?=\\w?[\\w\\s-]*\\b(?:class|(?<!@)interface|enum)\\s+[\\w$]+)",
+      "end": "}",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.class.end.bracket.curly.deca"
+        }
+      },
+      "name": "meta.class.deca",
+      "patterns": [
+        {
+          "include": "#storage-modifiers"
+        },
+        {
+          "include": "#generics"
+        },
+        {
+          "include": "#comments"
+        },
+        {
+          "captures": {
+            "1": {
+              "name": "storage.modifier.deca"
+            },
+            "2": {
+              "name": "entity.name.type.class.deca"
+            }
+          },
+          "match": "(class|(?<!@)interface|enum)\\s+([\\w$]+)",
+          "name": "meta.class.identifier.deca"
+        },
+        {
+          "begin": "extends",
+          "beginCaptures": {
+            "0": {
+              "name": "storage.modifier.extends.deca"
+            }
+          },
+          "end": "(?={|implements|permits)",
+          "name": "meta.definition.class.inherited.classes.deca",
+          "patterns": [
+            {
+              "include": "#object-types-inherited"
+            },
+            {
+              "include": "#comments"
+            }
+          ]
+        },
+        {
+          "begin": "(implements)\\s",
+          "beginCaptures": {
+            "1": {
+              "name": "storage.modifier.implements.deca"
+            }
+          },
+          "end": "(?=\\s*extends|permits|\\{)",
+          "name": "meta.definition.class.implemented.interfaces.deca",
+          "patterns": [
+            {
+              "include": "#object-types-inherited"
+            },
+            {
+              "include": "#comments"
+            }
+          ]
+        },
+        {
+          "begin": "(permits)\\s",
+          "beginCaptures": {
+            "1": {
+              "name": "storage.modifier.permits.deca"
+            }
+          },
+          "end": "(?=\\s*extends|implements|\\{)",
+          "name": "meta.definition.class.permits.classes.deca",
+          "patterns": [
+            {
+              "include": "#object-types-inherited"
+            },
+            {
+              "include": "#comments"
+            }
+          ]
+        },
+        {
+          "begin": "{",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.section.class.begin.bracket.curly.deca"
+            }
+          },
+          "end": "(?=})",
+          "contentName": "meta.class.body.deca",
+          "patterns": [
+            {
+              "include": "#class-body"
+            }
+          ]
+        }
+      ]
+    },
+    "class-body": {
+      "patterns": [
+        {
+          "include": "#comments-testbench"
+        },
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#enums"
+        },
+        {
+          "include": "#class"
+        },
+        {
+          "include": "#generics"
+        },
+        {
+          "include": "#static-initializer"
+        },
+        {
+          "include": "#class-fields-and-methods"
+        },
+        {
+          "include": "#annotations"
+        },
+        {
+          "include": "#storage-modifiers"
+        },
+        {
+          "include": "#member-variables"
+        },
+        {
+          "include": "#code"
+        }
+      ]
+    },
+    "class-fields-and-methods": {
+      "patterns": [
+        {
+          "begin": "(?=\\=)",
+          "end": "(?=;)",
+          "patterns": [
+            {
+              "include": "#code"
+            }
+          ]
+        },
+        {
+          "include": "#methods"
+        }
+      ]
+    },
+    "code": {
+      "patterns": [
+        {
+          "include": "#annotations"
+        },
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#enums"
+        },
+        {
+          "include": "#class"
+        },
+        {
+          "include": "#record"
+        },
+        {
+          "include": "#anonymous-block-and-instance-initializer"
+        },
+        {
+          "include": "#try-catch-finally"
+        },
+        {
+          "include": "#assertions"
+        },
+        {
+          "include": "#parens"
+        },
+        {
+          "include": "#constants-and-special-vars"
+        },
+        {
+          "include": "#numbers"
+        },
+        {
+          "include": "#anonymous-classes-and-new"
+        },
+        {
+          "include": "#lambda-expression"
+        },
+        {
+          "include": "#keywords"
+        },
+        {
+          "include": "#storage-modifiers"
+        },
+        {
+          "include": "#method-call"
+        },
+        {
+          "include": "#function-call"
+        },
+        {
+          "include": "#variables"
+        },
+        {
+          "include": "#variables-local"
+        },
+        {
+          "include": "#objects"
+        },
+        {
+          "include": "#properties"
+        },
+        {
+          "include": "#strings"
+        },
+        {
+          "include": "#all-types"
+        },
+        {
+          "match": ",",
+          "name": "punctuation.separator.delimiter.deca"
+        },
+        {
+          "match": "\\.",
+          "name": "punctuation.separator.period.deca"
+        },
+        {
+          "match": ";",
+          "name": "punctuation.terminator.deca"
+        }
+      ]
+    },
+    "comments": {
+      "patterns": [
+        {
+          "captures": {
+            "0": {
+              "name": "punctuation.definition.comment.deca"
+            }
+          },
+          "match": "/\\*\\*/",
+          "name": "comment.block.empty.deca"
+        },
+        {
+          "include": "#comments-inline"
+        }
+      ]
+    },
+    "comments-inline": {
+      "patterns": [
+        {
+          "begin": "/\\*",
+          "captures": {
+            "0": {
+              "name": "punctuation.definition.comment.deca"
+            }
+          },
+          "end": "\\*/",
+          "name": "comment.block.deca"
+        },
+        {
+          "begin": "(^[ \\t]+)?(?=//)",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.whitespace.comment.leading.deca"
+            }
+          },
+          "end": "(?!\\G)",
+          "patterns": [
+            {
+              "begin": "//",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.definition.comment.deca"
+                }
+              },
+              "end": "\\n",
+              "name": "comment.line.double-slash.deca"
+            }
+          ]
+        }
+      ]
+    },
+    "comments-testbench": {
+      "patterns": [
+        {
+          "begin": "^\\s*(/\\*)(?!/)",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.comment.deca"
+            }
+          },
+          "end": "\\*/",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.deca"
+            }
+          },
+          "name": "comment.block.tesbench.deca",
+          "patterns": [
+            {
+              "match": "@(name|description|std(out|err)\\.(equals|match))\\b",
+              "name": "keyword.other.documentation.tesbench.deca"
+            }
+          ]
+        },
+        {
+          "begin": "(^[ \\t]+)?(?=//)",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.whitespace.comment.leading.deca"
+            }
+          },
+          "end": "(?!\\G)",
+          "patterns": [
+            {
+              "begin": "//",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.definition.comment.deca"
+                }
+              },
+              "end": "\\n",
+              "name": "comment.line.double-slash.deca",
+              "patterns": [
+                {
+                  "match": "@(name|description|std(out|err)\\.(equals|match))\\b",
+                  "name": "keyword.other.documentation.tesbench.deca"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "constants-and-special-vars": {
+      "patterns": [
+        {
+          "match": "\\b(true|false|null)\\b",
+          "name": "constant.language.deca"
+        },
+        {
+          "match": "\\bthis\\b",
+          "name": "variable.language.this.deca"
+        }
+      ]
+    },
+    "function-call": {
+      "begin": "([A-Za-z_$][\\w$]*)\\s*(\\()",
+      "beginCaptures": {
+        "1": {
+          "name": "entity.name.function.deca"
+        },
+        "2": {
+          "name": "punctuation.definition.parameters.begin.bracket.round.deca"
+        }
+      },
+      "end": "\\)",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.parameters.end.bracket.round.deca"
+        }
+      },
+      "name": "meta.function-call.deca",
+      "patterns": [
+        {
+          "include": "#code"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "match": "\\b(return|while|for|if|else)\\b",
+          "name": "keyword.control.deca"
+        },
+        {
+          "match": "\\b(instanceof)\\b",
+          "name": "keyword.operator.instanceof.deca"
+        },
+        {
+          "match": "(===?|!=|<=|>=|<>|<|>)",
+          "name": "keyword.operator.comparison.deca"
+        },
+        {
+          "match": "(=)",
+          "name": "keyword.operator.assignment.deca"
+        },
+        {
+          "match": "(\\-|\\+|\\*|\\/|%)",
+          "name": "keyword.operator.arithmetic.deca"
+        },
+        {
+          "match": "(!|&&|\\|\\|)",
+          "name": "keyword.operator.logical.deca"
+        }
+      ]
+    },
+    "member-variables": {
+      "begin": "(?=protected)",
+      "end": "(?=\\=|;)",
+      "patterns": [
+        {
+          "include": "#storage-modifiers"
+        },
+        {
+          "include": "#variables"
+        },
+        {
+          "include": "#object-types"
+        }
+      ]
+    },
+    "method-call": {
+      "begin": "(\\.)\\s*([A-Za-z_$][\\w$]*)\\s*(\\()",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.separator.period.deca"
+        },
+        "2": {
+          "name": "entity.name.function.deca"
+        },
+        "3": {
+          "name": "punctuation.definition.parameters.begin.bracket.round.deca"
+        }
+      },
+      "end": "\\)",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.parameters.end.bracket.round.deca"
+        }
+      },
+      "name": "meta.method-call.deca",
+      "patterns": [
+        {
+          "include": "#code"
+        }
+      ]
+    },
+    "methods": {
+      "begin": "(?!new)(?=[\\w<].*\\s+)(?=([^=/]|/(?!/))+\\()",
+      "end": "(})|(?=;)",
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.section.method.end.bracket.curly.deca"
+        }
+      },
+      "name": "meta.method.deca",
+      "patterns": [
+        {
+          "include": "#storage-modifiers"
+        },
+        {
+          "begin": "(\\w+)\\s*(\\()",
+          "beginCaptures": {
+            "1": {
+              "name": "entity.name.function.deca"
+            },
+            "2": {
+              "name": "punctuation.definition.parameters.begin.bracket.round.deca"
+            }
+          },
+          "end": "\\)",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.parameters.end.bracket.round.deca"
+            }
+          },
+          "name": "meta.method.identifier.deca",
+          "patterns": [
+            {
+              "include": "#parameters"
+            },
+            {
+              "include": "#parens"
+            },
+            {
+              "include": "#comments"
+            }
+          ]
+        },
+        {
+          "include": "#generics"
+        },
+        {
+          "begin": "(?=\\w.*\\s+\\w+\\s*\\()",
+          "end": "(?=\\s+\\w+\\s*\\()",
+          "name": "meta.method.return-type.deca",
+          "patterns": [
+            {
+              "include": "#all-types"
+            },
+            {
+              "include": "#parens"
+            },
+            {
+              "include": "#comments"
+            }
+          ]
+        },
+        {
+          "include": "#throws"
+        },
+        {
+          "begin": "{",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.section.method.begin.bracket.curly.deca"
+            }
+          },
+          "end": "(?=})",
+          "contentName": "meta.method.body.deca",
+          "patterns": [
+            {
+              "include": "#code"
+            }
+          ]
+        },
+        {
+          "include": "#comments"
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "match": "(?x)\n\\b(?<!\\$)\n0(x|X)\n(\n  (?<!\\.)[0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?[Ll]?(?!\\.)\n  |\n  (\n    [0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?\\.?\n    |\n    ([0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?)?\\.[0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?\n  )\n  [Pp][+-]?[0-9]([0-9_]*[0-9])?[FfDd]?\n)\n\\b(?!\\$)",
+          "name": "constant.numeric.hex.deca"
+        },
+        {
+          "match": "\\b(?<!\\$)0(b|B)[01]([01_]*[01])?[Ll]?\\b(?!\\$)",
+          "name": "constant.numeric.binary.deca"
+        },
+        {
+          "match": "\\b(?<!\\$)0[0-7]([0-7_]*[0-7])?[Ll]?\\b(?!\\$)",
+          "name": "constant.numeric.octal.deca"
+        },
+        {
+          "match": "(?x)\n(?<!\\$)\n(\n  \\b[0-9]([0-9_]*[0-9])?\\.\\B(?!\\.)\n  |\n  \\b[0-9]([0-9_]*[0-9])?\\.([Ee][+-]?[0-9]([0-9_]*[0-9])?)[FfDd]?\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?\\.([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?\\.([0-9]([0-9_]*[0-9])?)([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]?\\b\n  |\n  (?<!\\.)\\B\\.[0-9]([0-9_]*[0-9])?([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]?\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?([Ee][+-]?[0-9]([0-9_]*[0-9])?)[FfDd]?\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]\\b\n  |\n  \\b(0|[1-9]([0-9_]*[0-9])?)(?!\\.)[Ll]?\\b\n)\n(?!\\$)",
+          "name": "constant.numeric.decimal.deca"
+        }
+      ]
+    },
+    "object-types": {
+      "patterns": [
+        {
+          "include": "#generics"
+        },
+        {
+          "begin": "\\b((?:[A-Za-z_]\\w*\\s*\\.\\s*)*)([A-Z_]\\w*)\\s*(?=\\[)",
+          "beginCaptures": {
+            "1": {
+              "patterns": [
+                {
+                  "match": "[A-Za-z_]\\w*",
+                  "name": "storage.type.deca"
+                },
+                {
+                  "match": "\\.",
+                  "name": "punctuation.separator.period.deca"
+                }
+              ]
+            },
+            "2": {
+              "name": "storage.type.object.array.deca"
+            }
+          },
+          "end": "(?!\\s*\\[)",
+          "patterns": [
+            {
+              "include": "#comments"
+            },
+            {
+              "include": "#parens"
+            }
+          ]
+        },
+        {
+          "match": "\\b((?:[A-Za-z_]\\w*\\s*\\.\\s*)*[A-Z_]\\w*)\\s*(?=<)",
+          "captures": {
+            "1": {
+              "patterns": [
+                {
+                  "match": "[A-Za-z_]\\w*",
+                  "name": "storage.type.deca"
+                },
+                {
+                  "match": "\\.",
+                  "name": "punctuation.separator.period.deca"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "match": "\\b((?:[A-Za-z_]\\w*\\s*\\.\\s*)*[A-Z_]\\w*)\\b((?=\\s*[A-Za-z$_\\n])|(?=\\s*\\.\\.\\.))",
+          "captures": {
+            "1": {
+              "patterns": [
+                {
+                  "match": "[A-Za-z_]\\w*",
+                  "name": "storage.type.deca"
+                },
+                {
+                  "match": "\\.",
+                  "name": "punctuation.separator.period.deca"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "object-types-inherited": {
+      "patterns": [
+        {
+          "include": "#generics"
+        },
+        {
+          "match": "\\b(?:[A-Z]\\w*\\s*(\\.)\\s*)*[A-Z]\\w*\\b",
+          "name": "entity.other.inherited-class.deca",
+          "captures": {
+            "1": {
+              "name": "punctuation.separator.period.deca"
+            }
+          }
+        },
+        {
+          "match": ",",
+          "name": "punctuation.separator.delimiter.deca"
+        }
+      ]
+    },
+    "objects": {
+      "match": "(?<![\\w$])[a-zA-Z_$][\\w$]*(?=\\s*\\.\\s*[\\w$]+)",
+      "name": "variable.other.object.deca"
+    },
+    "parameters": {
+      "patterns": [
+        {
+          "match": "\\bfinal\\b",
+          "name": "storage.modifier.deca"
+        },
+        {
+          "include": "#annotations"
+        },
+        {
+          "include": "#all-types"
+        },
+        {
+          "include": "#strings"
+        },
+        {
+          "match": "\\w+",
+          "name": "variable.parameter.deca"
+        },
+        {
+          "match": ",",
+          "name": "punctuation.separator.delimiter.deca"
+        },
+        {
+          "match": "\\.\\.\\.",
+          "name": "punctuation.definition.parameters.varargs.deca"
+        }
+      ]
+    },
+    "parens": {
+      "patterns": [
+        {
+          "begin": "\\(",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.bracket.round.deca"
+            }
+          },
+          "end": "\\)",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.bracket.round.deca"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#code"
+            }
+          ]
+        },
+        {
+          "begin": "\\[",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.bracket.square.deca"
+            }
+          },
+          "end": "\\]",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.bracket.square.deca"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#code"
+            }
+          ]
+        },
+        {
+          "begin": "{",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.bracket.curly.deca"
+            }
+          },
+          "end": "}",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.bracket.curly.deca"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#code"
+            }
+          ]
+        }
+      ]
+    },
+    "primitive-types": {
+      "match": "\\b(void|boolean|int|float)\\b",
+      "name": "storage.type.primitive.deca"
+    },
+    "properties": {
+      "patterns": [
+        {
+          "match": "(\\.)\\s*([a-zA-Z_$][\\w$]*)(?=\\s*\\.\\s*[a-zA-Z_$][\\w$]*)",
+          "captures": {
+            "1": {
+              "name": "punctuation.separator.period.deca"
+            },
+            "2": {
+              "name": "variable.other.object.property.deca"
+            }
+          }
+        },
+        {
+          "match": "(\\.)\\s*([a-zA-Z_$][\\w$]*)",
+          "captures": {
+            "1": {
+              "name": "punctuation.separator.period.deca"
+            },
+            "2": {
+              "name": "variable.other.object.property.deca"
+            }
+          }
+        },
+        {
+          "match": "(\\.)\\s*([0-9][\\w$]*)",
+          "captures": {
+            "1": {
+              "name": "punctuation.separator.period.deca"
+            },
+            "2": {
+              "name": "invalid.illegal.identifier.deca"
+            }
+          }
+        }
+      ]
+    },
+    "record": {
+      "begin": "(?=\\w?[\\w\\s]*\\b(?:record)\\s+[\\w$]+)",
+      "end": "}",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.class.end.bracket.curly.deca"
+        }
+      },
+      "name": "meta.record.deca",
+      "patterns": [
+        {
+          "include": "#storage-modifiers"
+        },
+        {
+          "include": "#generics"
+        },
+        {
+          "include": "#comments"
+        },
+        {
+          "begin": "(record)\\s+([\\w$]+)(<[\\w$]+>)?(\\()",
+          "beginCaptures": {
+            "1": {
+              "name": "storage.modifier.deca"
+            },
+            "2": {
+              "name": "entity.name.type.record.deca"
+            },
+            "3": {
+              "patterns": [
+                {
+                  "include": "#generics"
+                }
+              ]
+            },
+            "4": {
+              "name": "punctuation.definition.parameters.begin.bracket.round.deca"
+            }
+          },
+          "end": "\\)",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.parameters.end.bracket.round.deca"
+            }
+          },
+          "name": "meta.record.identifier.deca",
+          "patterns": [
+            {
+              "include": "#code"
+            }
+          ]
+        },
+        {
+          "begin": "(implements)\\s",
+          "beginCaptures": {
+            "1": {
+              "name": "storage.modifier.implements.deca"
+            }
+          },
+          "end": "(?=\\s*\\{)",
+          "name": "meta.definition.class.implemented.interfaces.deca",
+          "patterns": [
+            {
+              "include": "#object-types-inherited"
+            },
+            {
+              "include": "#comments"
+            }
+          ]
+        },
+        {
+          "include": "#record-body"
+        }
+      ]
+    },
+    "storage-modifiers": {
+      "match": "\\b(protected)\\b",
+      "name": "storage.modifier.deca"
+    },
+    "strings": {
+      "patterns": [
+        {
+          "begin": "\"",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.begin.deca"
+            }
+          },
+          "end": "\"",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.deca"
+            }
+          },
+          "name": "string.quoted.double.deca",
+          "patterns": [
+            {
+              "match": "\\\\.",
+              "name": "constant.character.escape.deca"
+            }
+          ]
+        },
+        {
+          "begin": "'",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.begin.deca"
+            }
+          },
+          "end": "'",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.deca"
+            }
+          },
+          "name": "string.quoted.single.deca",
+          "patterns": [
+            {
+              "match": "\\\\.",
+              "name": "constant.character.escape.deca"
+            }
+          ]
+        }
+      ]
+    },
+    "variables": {
+      "begin": "(?x)\n(?=\n  \\b\n  (\n    (void|boolean|byte|char|short|int|float|long|double)\n    |\n    (?>(\\w+\\.)*[A-Z_]+\\w*) # e.g. `javax.ws.rs.Response`, or `String`\n  )\n  \\b\n  \\s*\n  (\n    <[\\w<>,\\.?\\s\\[\\]]*> # e.g. `HashMap<Integer, String>`, or `List<java.lang.String>`\n  )?\n  \\s*\n  (\n    (\\[\\])* # int[][]\n  )?\n  \\s+\n  [A-Za-z_$][\\w$]* # At least one identifier after space\n  ([\\w\\[\\],$][\\w\\[\\],\\s]*)? # possibly primitive array or additional identifiers\n  \\s*(=|:|;)\n)",
+      "end": "(?=\\=|:|;)",
+      "name": "meta.definition.variable.deca",
+      "patterns": [
+        {
+          "match": "([A-Za-z$_][\\w$]*)(?=\\s*(\\[\\])*\\s*(;|:|=|,))",
+          "captures": {
+            "1": {
+              "name": "variable.other.definition.deca"
+            }
+          }
+        },
+        {
+          "include": "#all-types"
+        },
+        {
+          "include": "#code"
+        }
+      ]
+    },
+    "variables-local": {
+      "begin": "(?=\\b(var)\\b\\s+[A-Za-z_$][\\w$]*\\s*(=|:|;))",
+      "end": "(?=\\=|:|;)",
+      "name": "meta.definition.variable.local.deca",
+      "patterns": [
+        {
+          "match": "\\bvar\\b",
+          "name": "storage.type.local.deca"
+        },
+        {
+          "match": "([A-Za-z$_][\\w$]*)(?=\\s*(\\[\\])*\\s*(=|:|;))",
+          "captures": {
+            "1": {
+              "name": "variable.other.definition.deca"
+            }
+          }
+        },
+        {
+          "include": "#code"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.deca"
+}
